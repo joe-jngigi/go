@@ -32,11 +32,21 @@ After the extraction of the file, we can now add `/usr/local/go/bin` to the PATH
 export PATH=$PATH:/usr/local/go/bin
 ```
 
-Check go version
+## Check go version
 
 ```bash
 go version
+
+# Error
+
+# go version Command 'go' not found, but can be installed with:
+# sudo apt install gccgo-go 
+# sudo apt install golang-go
+
+
 ```
+
+Even after running the `PATH=$PATH:/usr/local/go/bin`, I encountered the error, because the `PATH` export only applied to the current terminal session. It means that I ran into a path persistence issue.
 
 ---
 ---
