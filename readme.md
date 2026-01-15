@@ -30,6 +30,7 @@ After the extraction of the file, we can now add `/usr/local/go/bin` to the PATH
 
 ```bash
 export PATH=$PATH:/usr/local/go/bin
+# export PATH=$PATH:/usr/local/go/bin
 ```
 
 ## Check go version
@@ -46,8 +47,59 @@ go version
 
 ```
 
-Even after running the `PATH=$PATH:/usr/local/go/bin`, I encountered the error, because the `PATH` export only applied to the current terminal session. It means that I ran into a path persistence issue.
+## Solving?
+
+Even after running the `PATH=$PATH:/usr/local/go/bin`, I encountered the error ("Command 'go' not found"), from shell, indicating that it can't find `go` executable in any diretories listed in the `$PATH` varibales.
+
+Running `export PATH=$PATH:/usr/local/go/bin` only updates the path for your current shell session. If you close the terminal or open a new session, If you close the terminal and open a new one. or if you're running this in a script the change will not persist.
+
+ **Test go version**
+
+We can use `/usr/local/go/bin/go version`
+
+> If this works, the issue is definitely with your PATH. If it doesn't _(e.g., "permission denied" or "no such file")_, check file permissions with `ls -l /usr/local/go/bin/go` (it should be executable; fix with `chmod +x /usr/local/go/bin/go` if needed, possibly with sudo).
+
+My system is using `zshrc` but you can identify what your system is using by running `echo $SHELL`. To solve the issue, we will edit the `.zshrc`, we use nano; 
+
+```BASH 
+nano ~/.zshrc
+```
+
+On opening the configuration file, we add the path to the bottom of the file; `export PATH=$PATH:/usr/local/go/bin`, save the file and run 
+
+```BASH
+source ~/.zshrc
+```
+
+## Pro Tip when Working with GO
+
+As you plan to develop go projects,it is good to set the `GOPATH`, where your code and downloaded packages live, we can add the path to the shell configuration file
+
+We will edit the `.zshrc` file, by adding the following configuration and the apply with `source .zshrc`
+
+```BASH
+# 1. Point to the compiler (System location)
+export GOROOT=/usr/local/go
+
+# 2. Point to your project drive (Your Odin location)
+export GOPATH=/run/media/odin/Odin/GO
+
+# 3. Add both to your system PATH
+export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+```
+
+We can the run `go env GOPATH GOROOT` to see if our paths have been added.
+
+In modern Go (version 1.11+), you aren't strictly forced to keep everything inside GOPATH/src. However, setting GOPATH to your external drive is still a smart move because:
+
+1. Downloads: All the third-party libraries you download (`go get`) will be saved to your external drive instead of filling up your system SSD.
+
+2. Binaries: Any tools you install will go into `/run/media/odin/Odin/GO/bin`.
+
+So next, we can start writting GO
 
 ---
 ---
+
+# GOLANG Programming
 

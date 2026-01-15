@@ -26,3 +26,9 @@ These are both shell configuration files used to customize the behavior of inter
 `.bashrc`: Often simpler for basic setups. If you're switching from Bash to Zsh, you might copy much of it over with minor tweaks.
 
 `.zshrc`: Frequently customized with frameworks like Oh My Zsh, which adds themes, plugins (e.g., git integration, syntax highlighting), and auto-suggestions. This makes it more extensible out of the box.
+
+## Are .bashrc and zshrc profiles?
+
+They are primarily know as "rc" files, short for "run commands", which are shell configurations for interactive shells
+
+Essentially, we can say that they are configurations files that act like settings for your shell, allowing you to personalize how it behaves everytime you open the terminal.They let you tweak things like your command prompt, add shortcuts(aliases), set environment variables (PATH), and even run startup scripts
