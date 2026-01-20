@@ -103,3 +103,4 @@ So next, we can start writting GO
 
 # GOLANG Programming
 
+GO is very interesting. We use `main` keyword to name the main function. The function `main` is usually declared in the main package.
