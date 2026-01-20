@@ -103,4 +103,37 @@ So next, we can start writting GO
 
 # GOLANG Programming
 
-GO is very interesting. We use `main` keyword to name the main function. The function `main` is usually declared in the main package.
+Before writing any line of code, we need to first run `go mod init` (This is just like running `npm init` when building nodejs apps).
+
+It is a command that initializes a new go module; a file named go.mod in the current file directory, which acts as the foundation for dependency management in your project. When we run the command, usually followed by a module path, like `go mod init github.com/username/project`, go performs two main functions.
+
+- Creates the `go.mod` file -> This file tracks the modules path and the version of go being used
+- Defiles the Module Root -> It tells the go toolchain that the current directory is the root of a project. allowing you to import local packages and manage external library
+
+**Why is it necessary?**
+
+Before Go Modules were introduced, Go Developers had to keep all their code in a specific folder called the `GOPATH`. 
+
+1. Dependency Management: It allows your project to record exactly which versions of external libraries (like a web framework or a database driver) you are using. This ensures that if someone else downloads your code, they get the exact same versions, preventing "works on my machine" bugs.
+
+2. Project Portability: Because of the go.mod file, you can now host your Go projects anywhere on your computer. You are no longer forced to work inside the `GOPATH/src` directory.
+
+3. Version Control: The go.mod file (along with go.sum) is checked into Git. This provides a "bill of materials" for your software, making it easy to track updates and security patches over time.
+
+4. Import Resolution: It allows you to create internal packages. For example, if your module is named my-app, you can import a sub-folder as import `"my-app/internal/auth"`, and Go will know exactly where to find it.
+
+## Getting Started
+
+In go, we use `main` keyword to name the main function. If you want to create an executable program, the entry point file must be declared as `package main`. In go compiler, the `main` tells that the specific package should compile as an executable
+
+**Golden rules to run a go project.**
+
+- `package main` -> It is usually at the top of your starting file
+- `func main` -> This is the specific function where the execution of your program begins.
+
+> If you name your package anything else, (e.g., package calculator), the go build command will produce a compiled library file, (a .a file) instead of a runnable application.
+
+**When do you NOT use package main?**
+
+You use a different package name when you are writing libraries or utility packages intended to be imported by other projects.
+
